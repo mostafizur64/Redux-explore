@@ -163,103 +163,224 @@
 // store.dispatch(anotherUserADD('rahman'));
 // store.dispatch(anotherUserADD('dhaka'));
 
-const { createStore, combineReducers } = require("redux");
-//product constants
-const GET_PRODUCTS = "GET_PRODUCTS";
-const ADD_PRODUCT = "ADD_PRODUCT";
+// step-2
 
-//Card constants
-const GET_CARDS = "GET_CARDS";
-const ADD_CARD = "ADD_CARD";
-// state declaration
-const initialProductState = {
-  products: ["sugar", "salt"],
-  numberoFProducts: 2,
-};
-// card declaration
-const initialCartState = {
-  cart: ["sugar"],
-  numberoFProducts: 1,
-};
+// const { createStore, combineReducers } = require("redux");
+// //product constants
+// const GET_PRODUCTS = "GET_PRODUCTS";
+// const ADD_PRODUCT = "ADD_PRODUCT";
 
-// product action declared
-const getProducts = () => {
-  return {
-    type: GET_PRODUCTS,
-  };
-};
-const addProduct = (product) => {
-  return {
-    type: ADD_PRODUCT,
-    payload: product,
-  };
-};
-// card action declared
-const getCard = () => {
-  return {
-    type: GET_CARDS,
-  };
-};
-const addCard = (product) => {
-  return {
-    type: ADD_CARD,
-    payload: product,
-  };
-};
+// //Card constants
+// const GET_CARDS = "GET_CARDS";
+// const ADD_CARD = "ADD_CARD";
+// // state declaration
+// const initialProductState = {
+//   products: ["sugar", "salt"],
+//   numberoFProducts: 2,
+// };
+// // card declaration
+// const initialCartState = {
+//   cart: ["sugar"],
+//   numberoFProducts: 1,
+// };
 
-//productReducer
+// // product action declared
+// const getProducts = () => {
+//   return {
+//     type: GET_PRODUCTS,
+//   };
+// };
+// const addProduct = (product) => {
+//   return {
+//     type: ADD_PRODUCT,
+//     payload: product,
+//   };
+// };
+// // card action declared
+// const getCard = () => {
+//   return {
+//     type: GET_CARDS,
+//   };
+// };
+// const addCard = (product) => {
+//   return {
+//     type: ADD_CARD,
+//     payload: product,
+//   };
+// };
 
-const productReducer = (state = initialProductState, action) => {
-  switch (action.type) {
-    case GET_PRODUCTS:
-      return {
-        ...state,
-      };
-    case ADD_PRODUCT:
-      return {
-        products: [...state.products, action.payload],
-        numberoFProducts: state.numberoFProducts + 1,
-      };
-    default:
-    return  state;
-  }
-};
+// //productReducer
 
-//cartReducer
+// const productReducer = (state = initialProductState, action) => {
+//   switch (action.type) {
+//     case GET_PRODUCTS:
+//       return {
+//         ...state,
+//       };
+//     case ADD_PRODUCT:
+//       return {
+//         products: [...state.products, action.payload],
+//         numberoFProducts: state.numberoFProducts + 1,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
-const cardReducer = (state = initialCartState, action) => {
-  switch (action.type) {
-    case GET_CARDS:
-      return {
-        ...state,
-      };
-    case ADD_CARD:
-      return {
-        cart: [...state.cart, action.payload],
-        numberoFProducts: state.numberoFProducts + 1,
-      };
-    default:
-   return  state;
-  }
-};
+// //cartReducer
 
-// product store
-// const store = createStore(productReducer);
+// const cardReducer = (state = initialCartState, action) => {
+//   switch (action.type) {
+//     case GET_CARDS:
+//       return {
+//         ...state,
+//       };
+//     case ADD_CARD:
+//       return {
+//         cart: [...state.cart, action.payload],
+//         numberoFProducts: state.numberoFProducts + 1,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+// // product store
+// // const store = createStore(productReducer);
+// // store.subscribe(() => {
+// //   console.log(store.getState());
+// // });
+// // store.dispatch(getProducts());
+// // store.dispatch(addProduct("pen"));
+
+// const rootReducer = combineReducers({
+//   productR: productReducer,
+//   cartR: cardReducer,
+// });
+// //card store
+// const store = createStore(rootReducer);
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
+// store.dispatch(getCard());
+// store.dispatch(addCard("pen"));
+
+// step -3 video number 8 here use redux-logger package
+
+// const { createStore, combineReducers,applyMiddleware } = require("redux");
+// const { default: logger } = require("redux-logger");
+// //product constants
+// const GET_PRODUCTS = "GET_PRODUCTS";
+// const ADD_PRODUCT = "ADD_PRODUCT";
+
+// // state declaration
+// const initialProductState = {
+//   products: ["sugar", "salt"],
+//   numberoFProducts: 2,
+// };
+
+// // product action declared
+// const getProducts = () => {
+//   return {
+//     type: GET_PRODUCTS,
+//   };
+// };
+// const addProduct = (product) => {
+//   return {
+//     type: ADD_PRODUCT,
+//     payload: product,
+//   };
+// };
+
+// //productReducer
+
+// const productReducer = (state = initialProductState, action) => {
+//   switch (action.type) {
+//     case GET_PRODUCTS:
+//       return {
+//         ...state,
+//       };
+//     case ADD_PRODUCT:
+//       return {
+//         products: [...state.products, action.payload],
+//         numberoFProducts: state.numberoFProducts + 1,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+// //cartReducer
+
+// // product store
+// const store = createStore(productReducer,applyMiddleware(logger));
 // store.subscribe(() => {
 //   console.log(store.getState());
 // });
 // store.dispatch(getProducts());
 // store.dispatch(addProduct("pen"));
 
-const rootReducer = combineReducers({
-  productR:productReducer,
-  cartR:cardReducer
-})
+/**
+ * async action - api calling
+ * api url - http://jsonplaceholder.typicode.com/todos
+ * middleware - redux-thunk
+ * axios api
+ *
+ */
 
-//card store
-const store = createStore(rootReducer);
-store.subscribe(() => {
-  console.log(store.getState());
-});
-store.dispatch(getCard());
-store.dispatch(addCard("pen"));
+// constants
+const GET_TODOS_REQUEST = "GET_TODOS_REQUEST";
+const GET_TODOS_SUCCESS = "GET_TODOS_SUCCESS";
+const GET_TODOS_FAILED = "GET_TODOS_FAILED";
+// state
+initialTodosState = {
+  todos: [],
+  isLoading: false,
+  error: null,
+};
+
+//action
+const getTodosRequest = () => {
+  return {
+    type: GET_TODOS_REQUEST,
+  };
+};
+const getTodosFailed = (error) => {
+  return {
+    type: GET_TODOS_FAILED,
+    payload: error,
+  };
+};
+const getTodosSuccess = (todos) => {
+  return {
+    type: GET_TODOS_SUCCESS,
+    payload: todos,
+  };
+};
+// reducers
+const todosReducer = (state = initialTodosState, action) => {
+  switch (action.type) {
+    case GET_TODOS_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_TODOS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        todos: action.payload,
+      };
+    case GET_TODOS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    default:
+      state;
+  }
+};
+// store
+const store = createStore(todosReducer);
+store.subscribe(() => {});
